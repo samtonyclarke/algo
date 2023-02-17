@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ThreeNumberSum {
     public static void main(String[] args) {
-        List<Integer[]> threeNumberSum = SimpleOrderNTo3.threeNumberSum(new int[]{12, 3, 1, 2, -6, 5, -8, 6}, 0);
+        List<Integer[]> threeNumberSum = OrderNSquared.threeNumberSum(new int[]{12, 3, 1, 2, -6, 5, -8, 6}, 0);
         for (Integer[] ints : threeNumberSum) {
             System.out.println(Arrays.toString(ints));
         }
@@ -30,21 +30,30 @@ public class ThreeNumberSum {
         }
     }
 
-    class HashSolution {
+    class OrderNSquared {
 
-        public static int[] twoNumberSum(int[] array, int targetSum) {
-            HashMap<Integer, Integer> inputs = new HashMap<>();
+        public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
+            Arrays.sort(array);
+
+            ArrayList<Integer[]> result = new ArrayList();
             for (int i = 0; i < array.length; i++) {
-                inputs.put(array[i], i);
-            }
-            for (int i = 0; i < array.length; i++) {
-                int gap = targetSum - array[i];
-                if (inputs.get(gap) != null && inputs.get(gap) != i) {
-                    return new int[]{array[i], gap};
+                int l = i + 1;
+                int r = array.length-1;
+                while (r > l) {
+                    int currentSum = array[i] + array[l] + array[r];
+                    if (currentSum == targetSum) {
+                        result.add(new Integer[]{array[i], array[l], array[r]});
+                        r--;
+                        l++;
+                    } else if (currentSum > targetSum) {
+                        r--;
+                    } else {
+                        l++;
+                    }
                 }
             }
 
-            return new int[0];
+            return result;
         }
     }
 
