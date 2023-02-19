@@ -56,19 +56,4 @@ public class ThreeNumberSum {
             return result;
         }
     }
-
-    class SinglePassHashSolution {
-
-        public static int[] twoNumberSum(int[] array, int targetSum) {
-            HashMap<Integer, Integer> inputs = new HashMap<>();
-            for (int i = 0; i < array.length; i++) {
-                int gap = targetSum - array[i];
-                if (inputs.get(gap) != null && inputs.get(gap) != i) {
-                    return new int[]{array[i], gap};
-                }
-                inputs.put(array[i], i);
-            }
-            return new int[0];
-        }
-    }
 }
