@@ -1,4 +1,4 @@
-package org.example;
+package org.tony.clarke.algo.arrays;
 
 import java.util.*;
 
