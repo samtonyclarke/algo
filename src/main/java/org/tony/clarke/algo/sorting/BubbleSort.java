@@ -13,9 +13,10 @@ public class BubbleSort {
 
     public static int[] bubbleSort(int[] array) {
         boolean swapped = false;
+        int a = 0;
         do {
             swapped = false;
-            for (int i = 0; i < array.length - 1; i++) {
+            for (int i = 0; i < array.length - (1 + a); i++) {
                 if (array[i] > array[i + 1]) {
                     int temp = array[i + 1];
                     array[i + 1] = array[i];
@@ -23,6 +24,7 @@ public class BubbleSort {
                     swapped = true;
                 }
             }
+            a++;
         } while (swapped == true);
         return array;
     }
