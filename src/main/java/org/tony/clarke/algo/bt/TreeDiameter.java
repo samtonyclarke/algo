@@ -21,7 +21,7 @@ public class TreeDiameter {
 
     public int binaryTreeDiameter(BinaryTree tree) {
         Pair pair = binaryTreeDiameterPair(tree);
-        return pair.longestPath;
+        return pair.longestSoFar;
     }
 
     private Pair binaryTreeDiameterPair(BinaryTree tree) {
@@ -32,19 +32,20 @@ public class TreeDiameter {
         Pair right = binaryTreeDiameterPair(tree.right);
 
         int height = Math.max(left.height, right.height) + 1; // we are recursing back out...so our height is one higher than whatever the tallest child is
-        int longestPath = Math.max(left.height + right.height, Math.max(left.longestPath, right.longestPath));
-        Pair toReturn = new Pair(height, longestPath);
+        // longestSoFar just keeps track of what the longest path available is so far...when finished traversing it will have the longest of all
+        int longestSoFar = Math.max(left.height + right.height, Math.max(left.longestSoFar, right.longestSoFar));
+        Pair toReturn = new Pair(height, longestSoFar);
         return toReturn;
     }
 
     private static class Pair {
-        Pair(int height, int longestPath) {
+        Pair(int height, int longestSoFar) {
             this.height = height;
-            this.longestPath = longestPath;
+            this.longestSoFar = longestSoFar;
         }
 
         int height;
-        int longestPath;
+        int longestSoFar;
     }
 
     static class BinaryTree {
